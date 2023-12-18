@@ -116,6 +116,7 @@
     <% } %>
     <br>
 <% } %>
+</p>
 
 <% for (int i = cpt-1; i >= 1; i--) { %>
     <% for (int j = 1; j <= cpt - i; j++) { %>
@@ -126,17 +127,6 @@
     <% } %>
     <br>
 <% } %>
-
-<% for (int i = 1; i <= cpt; i++) { %>
-    <% for (int j = 1; j <= cpt - i; j++) { %>
-        <%= "&nbsp;&nbsp;" %>
-    <% } %>
-    <% for (int k = 1; k <= i; k++) { %>
-        <%= "*" %>
-    <% } %>
-    <br>
-<% } %>
-</p>
 
 
 <h2>Exercice 7 : La table de multiplication</h2>
