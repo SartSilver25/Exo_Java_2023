@@ -40,34 +40,18 @@
     %>
 
 <h2>Exercice 1 : Les films entre 2000 et 2015</h2>
-<p>Extraire les films dont l'année est supérieur à l'année 2000 et inférieur à 2015.</p>
-<%-- Exercice 1 : Les films entre 2000 et 2015 --%>
-<h2>Exercice 1 : Les films entre 2000 et 2015</h2>
-<%
-    // Exemple de requête SQL
-    String sqlExercice1 = "SELECT idFilm, titre, année FROM Film WHERE année >= 2000 AND année < 2015";
-    PreparedStatement pstmtExercice1 = conn.prepareStatement(sqlExercice1);
-    ResultSet rsExercice1 = pstmtExercice1.executeQuery();
-%>
-
-<ul>
-<%
-    while (rsExercice1.next()) {
-        int idFilm = rsExercice1.getInt("idFilm");
-        String titre = rsExercice1.getString("titre");
-        int annee = rsExercice1.getInt("année");
-%>
-    <li>ID : <%= idFilm %>, Titre : <%= titre %>, Année : <%= annee %></li>
-<%
-    }
-%>
-</ul>
-
-<%-- Fermer les ressources pour l'exercice 1 --%>
-<%
-    rsExercice1.close();
-    pstmtExercice1.close();
-%>
+    <ul>
+    <%
+        while (rsExercice1.next()) {
+            int idFilm = rsExercice1.getInt("idFilm");
+            String titre = rsExercice1.getString("titre");
+            int annee = rsExercice1.getInt("année");
+    %>
+        <li>ID : <%= idFilm %>, Titre : <%= titre %>, Année : <%= annee %></li>
+    <%
+        }
+    %>
+    </ul>
 
 <h2>Exercice 2 : Année de recherche</h2>
 <p>Créer un champ de saisie permettant à l'utilisateur de choisir l'année de sa recherche.</p>
