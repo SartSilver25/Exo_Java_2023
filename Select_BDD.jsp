@@ -41,45 +41,33 @@
 
 <h2>Exercice 1 : Les films entre 2000 et 2015</h2>
 <p>Extraire les films dont l'année est supérieur à l'année 2000 et inférieur à 2015.</p>
-<% 
-    try {
-        String url = "jdbc:mariadb://localhost:3306/films";
-        String user = "mysql";
-        String password = "mysql";
+<%-- Exercice 1 : Les films entre 2000 et 2015 --%>
+<h2>Exercice 1 : Les films entre 2000 et 2015</h2>
+<%
+    // Exemple de requête SQL
+    String sqlExercice1 = "SELECT idFilm, titre, année FROM Film WHERE année >= 2000 AND année < 2015";
+    PreparedStatement pstmtExercice1 = conn.prepareStatement(sqlExercice1);
+    ResultSet rsExercice1 = pstmtExercice1.executeQuery();
+%>
 
-        // Charger le pilote JDBC (pilote disponible dans WEB-INF/lib)
-        Class.forName("org.mariadb.jdbc.Driver");
-
-        // Établir la connexion
-        Connection conn = DriverManager.getConnection(url, user, password);
-
-        // Exemple de requête SQL
-        String sql = "SELECT idFilm, titre, année FROM Film WHERE année >= 2000 AND année < 2015";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        ResultSet rs = pstmt.executeQuery();
-
-        // Afficher les résultats (à adapter selon vos besoins)
-        out.println("<h2>Exercice 1 : Les films entre 2000 et 2015</h2>");
-        out.println("<ul>");
-        while (rs.next()) {
-            int idFilm = rs.getInt("idFilm");
-            String titre = rs.getString("titre");
-            int annee = rs.getInt("année");
-            // Faites ce que vous voulez avec les données...
-            // Exemple d'affichage des données
-            out.println("<li>ID : " + idFilm + ", Titre : " + titre + ", Année : " + annee + "</li>");
-        }
-        out.println("</ul>");
-
-        // Fermer les ressources 
-        rs.close();
-        pstmt.close();
-        conn.close();
-    } catch (Exception e) {
-        // Gérer les exceptions appropriées (SQLException, ClassNotFoundException, etc.)
-        out.println("Erreur : " + e.getMessage());
+<ul>
+<%
+    while (rsExercice1.next()) {
+        int idFilm = rsExercice1.getInt("idFilm");
+        String titre = rsExercice1.getString("titre");
+        int annee = rsExercice1.getInt("année");
+%>
+    <li>ID : <%= idFilm %>, Titre : <%= titre %>, Année : <%= annee %></li>
+<%
     }
-    %>
+%>
+</ul>
+
+<%-- Fermer les ressources pour l'exercice 1 --%>
+<%
+    rsExercice1.close();
+    pstmtExercice1.close();
+%>
 
 <h2>Exercice 2 : Année de recherche</h2>
 <p>Créer un champ de saisie permettant à l'utilisateur de choisir l'année de sa recherche.</p>
