@@ -41,7 +41,27 @@
 
 <h2>Exercice 1 : Les films entre 2000 et 2015</h2>
 <p>Extraire les films dont l'année est supérieur à l'année 2000 et inférieur à 2015.</p>
-le (rs.next()) {
+<% 
+    try {
+        String url = "jdbc:mariadb://localhost:3306/films";
+        String user = "mysql";
+        String password = "mysql";
+
+        // Charger le pilote JDBC (pilote disponible dans WEB-INF/lib)
+        Class.forName("org.mariadb.jdbc.Driver");
+
+        // Établir la connexion
+        Connection conn = DriverManager.getConnection(url, user, password);
+
+        // Exemple de requête SQL
+        String sql = "SELECT idFilm, titre, année FROM Film WHERE année >= 2000 AND année < 2015";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+
+        // Afficher les résultats (à adapter selon vos besoins)
+        out.println("<h2>Exercice 1 : Les films entre 2000 et 2015</h2>");
+        out.println("<ul>");
+        while (rs.next()) {
             int idFilm = rs.getInt("idFilm");
             String titre = rs.getString("titre");
             int annee = rs.getInt("année");
